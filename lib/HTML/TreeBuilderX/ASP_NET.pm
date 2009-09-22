@@ -52,6 +52,12 @@ has 'postback_name' => ( isa => 'Str', is => 'ro', default => '__doPostBack' );
 
 sub httpRequest {
 	my ( $self, @args ) = @_;
+	
+	# fix duplicated __EVENTTARGET and __EVENTARGUMENT
+	my @allfields = $self->hrf->allfields;
+    pop @allfields; pop @allfields; # remove __EVENTTARGET/__EVENTARGUMENT we pushed at last
+    $self->hrf->{allfields} = \@allfields;
+	
 	$self->press(@args);
 }
 
