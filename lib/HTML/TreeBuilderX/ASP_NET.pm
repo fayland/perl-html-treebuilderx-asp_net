@@ -55,7 +55,10 @@ sub httpRequest {
 	
 	# fix duplicated __EVENTTARGET and __EVENTARGUMENT
 	my @allfields = $self->hrf->allfields;
-	pop @allfields; pop @allfields; # remove __EVENTTARGET/__EVENTARGUMENT we pushed at last
+	if ( scalar(grep { $_ eq '__EVENTTARGET' } @allfields) > 1 ) {
+	    # remove __EVENTTARGET/__EVENTARGUMENT we pushed at last
+	    pop @allfields; pop @allfields;
+	}
 	$self->hrf->{allfields} = \@allfields;
 
 	$self->press(@args);
