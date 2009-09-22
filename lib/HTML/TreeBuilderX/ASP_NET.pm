@@ -55,9 +55,9 @@ sub httpRequest {
 	
 	# fix duplicated __EVENTTARGET and __EVENTARGUMENT
 	my @allfields = $self->hrf->allfields;
-    pop @allfields; pop @allfields; # remove __EVENTTARGET/__EVENTARGUMENT we pushed at last
-    $self->hrf->{allfields} = \@allfields;
-	
+	pop @allfields; pop @allfields; # remove __EVENTTARGET/__EVENTARGUMENT we pushed at last
+	$self->hrf->{allfields} = \@allfields;
+
 	$self->press(@args);
 }
 
